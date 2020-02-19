@@ -1,0 +1,3 @@
+first commit
+db baglantisi yapildi
+giris yap sayfasi olusturuldu
