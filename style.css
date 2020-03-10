@@ -1,0 +1,35 @@
+.form{
+    width: 400px;
+    padding: 10px;
+    border: solid thin rgb(190, 51, 51);
+    margin: auto;
+    margin-top: 250px;
+    text-align: center;
+    border-radius: 70px;
+}
+
+form input{
+
+    padding: 10px;
+    width: 300px;
+    margin-top: 10px;
+    border: none;
+    border-bottom: solid thin #ddd;
+}
+
+.btn{
+
+    background-color: rgb(63, 139, 56);
+    color:#fff;
+    font-weight: bold;
+}
+
+.btnn{
+
+    background-color: rgb(63, 139, 56);
+    color:#fff;
+    font-weight: bold;
+}
+.body{
+    background-image: url('img/arkaplan.jpg');
+}
