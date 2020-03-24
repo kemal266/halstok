@@ -1,6 +1,0 @@
-first commit
-db baglantisi yapildi
-giris yap sayfasi olusturuldu
-cpmmit 2
-db baglantisi yapildi
-giris yap sayfasi olusturuldu
