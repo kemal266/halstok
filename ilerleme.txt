@@ -1,0 +1,7 @@
+Menüler dinamik hale geldi
+Firmalar ürün ekleme işlemi yapıldı
+Arayüzde firma listelemesi yapıldı
+Arayüzde ürün listelemesi yapıldı
+Admin ve Kullanıcı profil düzenleme yapıldı
+Kullanıcı login işlemi yapıldı
+Admin Panelinde kullanıcı listeleme ve düzenleme işlemleri yapıldı
