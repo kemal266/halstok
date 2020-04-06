@@ -1,3 +1,23 @@
+<?php
+ob_start();
+session_start();
+include '../netting/baglan.php';
+$kullanicisor=$db->prepare("select * from kullanici where kullanici_mail=:mail");
+$kullanicisor->execute(array(
+  'mail' => $_SESSION['kullanici_mail']
+  ));
+  $say=$kullanicisor->rowCount();
+
+  if ($say==0) {
+
+    header("location:login.php?durum=izinsiz");
+    exit;
+  }
+
+$kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,7 +27,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentelella Alela! | </title>
+    <title>Hal Stok Sistemi Yönetim | CMS</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -38,7 +58,8 @@
               </div>
               <div class="profile_info">
                 <span>Hoşgeldin</span>
-                <h2>Admin</h2>
+                <h2><?php echo $_SESSION['kullanici_mail']; ?></h2>
+               
               </div>
               <div class="clearfix"></div>
             </div>
@@ -79,19 +100,14 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">Kemal Tokmak
+                    <img src="images/img.jpg" alt=""><?php echo $_SESSION['kullanici_mail']; ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="kullanici-profil.php"> Kullanıcı Profili</a></li>
                     <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Ayarlar</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Yardım</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Çıkış</a></li>
+           
+                    <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Çıkış</a></li>
                   </ul>
                 </li>
 

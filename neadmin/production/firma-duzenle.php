@@ -137,12 +137,12 @@ if (@$_GET['durum']=='ok') {?>
                         <select id="heard" class="form-control"name="firma_durum" required>
                             <?php
                                 if ($firmacek['firma_durum']==1) {?>
-                                     <option value="1">Aktif</option>
-                                     <option value="0">Pasif</option>
+                                     <option value="1">Açık</option>
+                                     <option value="0">Kapalı</option>
 
                                 <?php } else {?>
-                                    <option value="0">Pasif</option>
-                                    <option value="1">Aktif</option>
+                                    <option value="0">Kapalı</option>
+                                    <option value="1">Açık</option>
                                     
                                     
                                 <?php } ?>

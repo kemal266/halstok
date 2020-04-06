@@ -123,8 +123,8 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                         <select id="heard" class="form-control"name="firma_durum" required>
-                            <option value="1">Aktif</option>
-                            <option value="0">Pasif</option>
+                            <option value="1">Açık</option>
+                            <option value="0">Kapalı</option>
                          
                           </select>
                         </div>

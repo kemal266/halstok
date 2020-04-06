@@ -117,10 +117,10 @@ if (@$_GET['durum']=='ok') {?>
                             
                             if ($firmacek['firma_durum']=="1") {
 
-                              echo "AKTİF";
+                              echo "Açık";
                             }else {
 
-                              echo "PASİF";
+                              echo "Kapalı";
                             }
                             
                             ?></b></td>

@@ -1,187 +1,272 @@
 <?php
-include '../neadmin/netting/baglan.php';
+ob_start();
 
-$ayarsor=$db->prepare("select * from ayar where ayar_id=?");
-$ayarsor->execute(array(0));
+include '../neadmin/netting/baglan.php';
+include '../neadmin/production/fonksiyon.php';
+//Belirli veriyi seçme işlemi
+$ayarsor=$db->prepare("SELECT * FROM ayar where ayar_id=:id");
+$ayarsor->execute(array(
+	'id' => 0
+	));
 $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
 
 
+$kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail");
+$kullanicisor->execute(array(
+  'mail' => @$_SESSION['userkullanici_mail']
+  ));
+$say=$kullanicisor->rowCount();
+$kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
+
 ?>
-    
 <!DOCTYPE html>
-<html class="wide wow-animation" lang="en">
-  <head>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title><?php echo $ayarcek['ayar_title'] ?></title>
+	<meta name="description" content="<?php echo $ayarcek['ayar_description'] ?>">
+	<meta name="keywords" content="<?php echo $ayarcek['ayar_keywords'] ?>">
+	<meta name="author" content="<?php echo $ayarcek['ayar_author'] ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?php echo $ayarcek['ayar_title']; ?></title>
+	<!-- Fonts -->
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,400italic,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href='font-awesome\css\font-awesome.css' rel="stylesheet" type="text/css">
+	<!-- Bootstrap -->
+	<link href="bootstrap\css\bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Main Style -->
+	<link rel="stylesheet" href="style.css">
+	
+	<!-- owl Style -->
+	<link rel="stylesheet" href="css\owl.carousel.css">
+	<link rel="stylesheet" href="css\owl.transitions.css">
+	
 
-
-     
-      <meta name="Description" content="<?php echo $ayarcek['ayar_description']; ?>"/>
- <meta name="Keywords" content="<?php echo $ayarcek['ayar_keywords']; ?>"/>
-
-    <meta name="format-detection" content="telephone=no">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <!-- Stylesheets-->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Poppins:300,400,500">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/style.css">
-    <!--[if lt IE 10]>
-    <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
-    <script src="js/html5shiv.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="preloader">
-      <div class="preloader-body">
-        <div class="cssload-container"><span></span><span></span><span></span><span></span>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    </head>
+    <body>
+     <div id="wrapper">
+      <div class="header"><!--Header -->
+       <div class="container">
+        <div class="row">
+         <div class="col-xs-6 col-md-4 main-logo">
+          <a href="index.php"><img width="250" src="<?php echo $ayarcek['ayar_logo'] ?>" alt="Site Logosu" class="logo img-responsive"></a>
         </div>
+        
+
+
+        <div class="col-md-8">
+          <div class="pushright">
+           <div class="top">
+
+             <?php 
+
+             if (!isset($_SESSION['userkullanici_mail'])) {?>
+
+             <a href="#" id="reg" class="btn btn-default btn-dark">Giriş Yap<span>-- yada --</span>Kayıt Ol</a>
+
+             <?php } else { ?>
+
+             <a href="#"  class="btn btn-default btn-dark">Hoşgeldin<span>--</span><?php echo $kullanicicek['kullanici_adsoyad'] ?></a>
+
+             <?php } ?>
+
+
+             <div class="regwrap">
+               <div class="row">
+                <div class="col-md-6 regform">
+                 <div class="title-widget-bg">
+                  <div class="title-widget">Kullanıcı Giriş</div>
+                </div>
+
+
+
+
+                <form action="../neadmin/netting/islem.php" method="POST" role="form">
+
+
+                  <div class="form-group">
+                   <input type="text" class="form-control" name="kullanici_mail" id="username" placeholder="Kullanıcı Adınız (Mail Adresiniz)">
+                 </div>
+
+
+                 <div class="form-group">
+                   <input type="password" class="form-control" name="kullanici_password" id="password" placeholder="Şifreniz">
+                 </div>
+
+
+                 <div class="form-group">
+                   <button type="submit" name="kullanicigiris" class="btn btn-default btn-red btn-sm">Giriş Yap</button>
+                 </div>
+
+               </form>
+
+
+             </div>
+             <div class="col-md-6">
+               <div class="title-widget-bg">
+                <div class="title-widget">Kayıt Ol</div>
+
+              </div>
+              <p>
+                Yeni Kullanıcımısın? Alışverişe başlamak için hemen kayıt olmalısın!
+              </p>
+              <a href="register.php"><button class="btn btn-default btn-yellow">Kayıt Ol</button></a>
+            </div>
+          </div>
+        </div>
+        <div class="srch-wrap">
+         <a href="#" id="srch" class="btn btn-default btn-search"><i class="fa fa-search"></i></a>
+       </div>
+       <div class="srchwrap">
+         <div class="row">
+          <div class="col-md-12">
+           <form class="form-horizontal" role="form">
+            <div class="form-group">
+             <label for="search" class="col-sm-2 control-label">Search</label>
+             <div class="col-sm-10">
+              <input type="text" class="form-control" id="search">
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-    <div class="page">
-      <!-- Page Header-->
-      <header class="section page-header">
-        <!-- RD Navbar-->
-        <div class="rd-navbar-wrap rd-navbar-modern-wrap">
-          <nav class="rd-navbar rd-navbar-modern" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="70px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
-            <div class="rd-navbar-main-outer">
-              <div class="rd-navbar-main">
-                <!-- RD Navbar Panel-->
-                <div class="rd-navbar-panel">
-                  <!-- RD Navbar Toggle-->
-                  <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-                  <!-- RD Navbar Brand-->
-                  <div class="rd-navbar-brand"><a class="brand" href="index.php">
-                  <img src="../<?php echo $ayarcek['ayar_logo']; ?>" alt="<?php echo $ayarcek['ayar_title']; ?>" width="196" height="47"/></a></div>
-                </div>
-                <div class="rd-navbar-main-element">
-                  <div class="rd-navbar-nav-wrap">
-                    <!-- RD Navbar Basket-->
-                    <div class="rd-navbar-basket-wrap">
-                      <button class="rd-navbar-basket fl-bigmug-line-shopping198" data-rd-navbar-toggle=".cart-inline"><span>2</span></button>
-                      <div class="cart-inline">
-                        <div class="cart-inline-header">
-                          <h5 class="cart-inline-title">In cart:<span> 2</span> Products</h5>
-                          <h6 class="cart-inline-title">Total price:<span> $800</span></h6>
-                        </div>
-                        <div class="cart-inline-body">
-                          <div class="cart-inline-item">
-                            <div class="unit align-items-center">
-                              <div class="unit-left"><a class="cart-inline-figure" href="#"><img src="images/product-mini-1-108x100.png" alt="" width="108" height="100"/></a></div>
-                              <div class="unit-body">
-                                <h6 class="cart-inline-name"><a href="#">Blueberries</a></h6>
-                                <div>
-                                  <div class="group-xs group-inline-middle">
-                                    <div class="table-cart-stepper">
-                                      <input class="form-input" type="number" data-zeros="true" value="1" min="1" max="1000">
-                                    </div>
-                                    <h6 class="cart-inline-title">$550</h6>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="cart-inline-item">
-                            <div class="unit align-items-center">
-                              <div class="unit-left"><a class="cart-inline-figure" href="#"><img src="images/product-mini-2-108x100.png" alt="" width="108" height="100"/></a></div>
-                              <div class="unit-body">
-                                <h6 class="cart-inline-name"><a href="#">Avocados</a></h6>
-                                <div>
-                                  <div class="group-xs group-inline-middle">
-                                    <div class="table-cart-stepper">
-                                      <input class="form-input" type="number" data-zeros="true" value="1" min="1" max="1000">
-                                    </div>
-                                    <h6 class="cart-inline-title">$250</h6>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="cart-inline-footer">
-                          <div class="group-sm"><a class="button button-md button-default-outline-2 button-wapasha" href="#">Go to cart</a><a class="button button-md button-primary button-pipaluk" href="#">Checkout</a></div>
-                        </div>
-                      </div>
-                    </div><a class="rd-navbar-basket rd-navbar-basket-mobile fl-bigmug-line-shopping198" href="#"><span>2</span></a>
-                    <!-- RD Navbar Search-->
-                    <div class="rd-navbar-search">
-                      <button class="rd-navbar-search-toggle" data-rd-navbar-toggle=".rd-navbar-search"><span></span></button>
-                      <form class="rd-search" action="#">
-                        <div class="form-wrap">
-                          <label class="form-label" for="rd-navbar-search-form-input">Anahtar Kelimeyi Giriniz...</label>
-                          <input class="rd-navbar-search-form-input form-input" id="rd-navbar-search-form-input" type="text" name="search">
-                          <button class="rd-search-form-submit fl-bigmug-line-search74" type="submit"></button>
-                        </div>
-                      </form>
-                    </div>
-                    <!-- RD Navbar Nav-->
-                    <ul class="rd-navbar-nav">
-                      <li class="rd-nav-item active"><a class="rd-nav-link" href="index.php">Anasayfa</a>
-                      </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="iletisim.php">Hakkımızda</a>
-                      </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="firmalar.php">firma</a>
-                      </li>
-                    
-                    </ul>
-                  </div>
-                  <div class="rd-navbar-project-hamburger" data-multitoggle=".rd-navbar-main" data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate>
-                    <div class="project-hamburger"><span class="project-hamburger-arrow-top"></span><span class="project-hamburger-arrow-center"></span><span class="project-hamburger-arrow-bottom"></span></div>
-                    <div class="project-hamburger-2"><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span><span class="project-hamburger-arrow"></span>
-                    </div>
-                    <div class="project-close"><span></span><span></span></div>
-                  </div>
-                </div>
-                <div class="rd-navbar-project rd-navbar-modern-project">
-                  <div class="rd-navbar-project-modern-header">
-                    <h4 class="rd-navbar-project-modern-title">Get in Touch</h4>
-                    <div class="rd-navbar-project-hamburger" data-multitoggle=".rd-navbar-main" data-multitoggle-blur=".rd-navbar-wrap" data-multitoggle-isolate>
-                      <div class="project-close"><span></span><span></span></div>
-                    </div>
-                  </div>
-                  <div class="rd-navbar-project-content rd-navbar-modern-project-content">
-                    <div>
-                      <p>We are always ready to provide you with fresh organic products for your home or office. Contact us to find out how we can help you.</p>
-                      <div class="heading-6 subtitle">Our Contacts</div>
-                      <div class="row row-10 gutters-10">
-                        <div class="col-12"><img src="images/home-sidebar-394x255.jpg" alt="" width="394" height="255"/>
-                        </div>
-                      </div>
-                      <ul class="rd-navbar-modern-contacts">
-                        <li>
-                          <div class="unit unit-spacing-sm">
-                            <div class="unit-left"><span class="icon fa fa-phone"></span></div>
-                            <div class="unit-body"><a class="link-phone" href="tel:#"><?php echo $ayarcek['ayar_tel']; ?></a></div>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="unit unit-spacing-sm">
-                            <div class="unit-left"><span class="icon fa fa-location-arrow"></span></div>
-                            <div class="unit-body"><a class="link-location" href="#"><?php echo $ayarcek['ayar_adres']; ?></a></div>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="unit unit-spacing-sm">
-                            <div class="unit-left"><span class="icon fa fa-envelope"></span></div>
-                            <div class="unit-body"><a class="link-email" href="mailto:#"><?php echo $ayarcek['ayar_mail']; ?></a></div>
-                          </div>
-                        </li>
-                      </ul>
-                      <ul class="list-inline rd-navbar-modern-list-social">
-                        <li><a class="icon fa fa-facebook" href="#"><?php echo $ayarcek['ayar_facebook']; ?></a></li>
-                        <li><a class="icon fa fa-twitter" href="#"><?php echo $ayarcek['ayar_twitter']; ?></a></li>
-                        <li><a class="icon fa fa-google-plus" href="#"></a><?php echo $ayarcek['ayar_youtube']; ?></li>
-                        <li><a class="icon fa fa-instagram" href="#"></a></li>
-                        <li><a class="icon fa fa-pinterest" href="#"></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </nav>
-        </div>
-      </header>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="dashed"></div>
+</div><!--Header -->
+<div class="main-nav"><!--end main-nav -->
+ <div class="navbar navbar-default navbar-static-top">
+  <div class="container">
+   <div class="row">
+    <div class="col-md-10">
+     <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+     </button>
+   </div>
+   <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+     <li><a href="index.php" class="active">Anasayfa</a><div class="curve"></div></li>
+
+
+     <?php 
+
+     $menusor=$db->prepare("SELECT * FROM menu where menu_durum=:durum order by menu_sira ASC limit 5");
+     $menusor->execute(array(
+      'durum' => 1
+      ));
+
+     while($menucek=$menusor->fetch(PDO::FETCH_ASSOC)) {
+       ?>
+
+
+       <li><a href="
+
+        <?php 
+
+        if (!empty($menucek['menu_url'])) {
+
+          echo $menucek['menu_url'];
+
+        } else {
+
+
+          echo "sayfa-".seo($menucek['menu_ad']);
+
+        }
+        ?>
+
+
+        "><?php echo $menucek['menu_ad'] ?></a></li>
+
+        <?php } ?>
+
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-2 machart">
+   <button id="popcart" class="btn btn-default btn-chart btn-sm "><span class="mychart">Cart</span>|<span class="allprice">$0.00</span></button>
+   <div class="popcart">
+    <table class="table table-condensed popcart-inner">
+     <tbody>
+      <tr>
+       <td>
+        <a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
+      </td>
+      <td><a href="product.htm">Casio Exilim Zoom</a><br><span>Color: green</span></td>
+      <td>1X</td>
+      <td>$138.80</td>
+      <td><a href=""><i class="fa fa-times-circle fa-2x"></i></a></td>
+    </tr>
+    <tr>
+     <td>
+      <a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
+    </td>
+    <td><a href="product.htm">Casio Exilim Zoom</a><br><span>Color: green</span></td>
+    <td>1X</td>
+    <td>$138.80</td>
+    <td><a href=""><i class="fa fa-times-circle fa-2x"></i></a></td>
+  </tr>
+  <tr>
+   <td>
+    <a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
+  </td>
+  <td><a href="product.htm">Casio Exilim Zoom</a><br><span>Color: green</span></td>
+  <td>1X</td>
+  <td>$138.80</td>
+  <td><a href=""><i class="fa fa-times-circle fa-2x"></i></a></td>
+</tr>
+</tbody>
+</table>
+<span class="sub-tot">Sub-Total : <span>$277.60</span> | <span>Vat (17.5%)</span> : $36.00 </span>
+<br>
+<div class="btn-popcart">
+ <a href="checkout.htm" class="btn btn-default btn-red btn-sm">Checkout</a>
+ <a href="cart.htm" class="btn btn-default btn-red btn-sm">More</a>
+</div>
+<div class="popcart-tot">
+ <p>
+  Total<br>
+  <span>$313.60</span>
+</p>
+</div>
+<div class="clearfix"></div>
+</div>
+</div>
+
+<?php 
+
+if (isset($_SESSION['userkullanici_mail'])) {?>
+
+<ul class="small-menu">
+  <li><a href="hesabim" class="myacc">Hesap Bilgilerim</a></li>
+  <li><a href="siparislerim" class="myshop">Siparişlerim</a></li>
+  <li><a href="logout" class="mycheck">Güvenli Çıkış</a></li>
+</ul>
+
+<?php }
+
+?>
+
+
+
+
+</div>
+</div>
+</div>
+	</div><!--end main-nav -->

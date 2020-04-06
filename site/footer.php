@@ -1,149 +1,114 @@
-<?php
-include '../neadmin/netting/baglan.php';
+<div class="f-widget"><!--footer Widget-->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4"><!--footer twitter widget-->
+					<div class="title-widget-bg">
+						<div class="title-widget">Twitter Updates</div>
+					</div>
+					<ul class="tweets">
+						<li>Check out this great #themeforest item for you
+						'Simpler Landing' <a href="#">http://t.co/LbLwldb6 </a>
+						<span>2 hours ago</span></li>
+						<li class="lastone">Check out this great #themeforest item for you
+						'Simpler Landing' <a href="#">http://t.co/LbLwldb6 </a>
+						<span>2 hours ago</span></li>
+					</ul>
+					<div class="clearfix"></div>
+					<a href="#" class="btn btn-default btn-follow"><i class="fa fa-twitter fa-2x"></i><div>Follow us on twitter</div></a>
+				</div><!--footer twitter widget-->
+				<div class="col-md-4"><!--footer newsletter widget-->
+					<div class="title-widget-bg">
+						<div class="title-widget">Newsletter Signup</div>
+					</div>
+					<div class="newsletter">
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+						</p>
+						<form role="form">
+							<div class="form-group">
+								<label>Your Email address</label>
+								<input type="email" class="form-control newstler-input" id="exampleInputEmail1" placeholder="Enter email">
+								<button class="btn btn-default btn-red btn-sm">Sign Up</button>
+							</div>
+						</form>
+					</div>
+				</div><!--footer newsletter widget-->
+				<div class="col-md-4"><!--footer contact widget-->
+					<div class="title-widget-bg">
+						<div class="title-widget-cursive">Shopping</div>
+					</div>
+					<ul class="contact-widget">
+						<li class="fphone"><?php echo $ayarcek['ayar_tel']; ?> <br><?php echo $ayarcek['ayar_tel']; ?></li>
+						<li class="fmobile"><?php echo $ayarcek['ayar_gsm']; ?><br><?php echo $ayarcek['ayar_gsm']; ?></li>
+						<li class="fmail lastone"><?php echo $ayarcek['ayar_mail']; ?><br><?php echo $ayarcek['ayar_mail']; ?></li>
+					</ul>
+				</div><!--footer contact widget-->
+			</div>
+			<div class="spacer"></div>
+		</div>
+	</div><!--footer Widget-->
+	<div class="footer"><!--footer-->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+					<ul class="footermenu"><!--footer nav-->
+						<li><a href="index-1.htm">Home</a></li>
+						<li><a href="cart.htm">My Cart</a></li>
+						<li><a href="checkout.htm">Checkout</a></li>
+						<li><a href="order.htm">Completed Orders</a></li>
+						<li><a href="contact.htm">Contact us</a></li>
+					</ul><!--footer nav-->
+					<div class="f-credit">&copy;<?php echo $ayarcek['ayar_author']; ?><a href="#">yoursite.com</a></div>
+					<a href=""><div class="payment visa"></div></a>
+					<a href=""><div class="payment paypal"></div></a>
+					<a href=""><div class="payment mc"></div></a>
+					<a href=""><div class="payment nh"></div></a>
+				</div>
+				<div class="col-md-3"><!--footer Share-->
+					<div class="followon">Follow us on</div>
+					<div class="fsoc">
+                        
+                    <a href="http://<?php echo $ayarcek['ayar_twitter']; ?>" class="ftwitter">twitter</a>
+                        
+                    <a href="http://<?php echo $ayarcek['ayar_facebook']; ?>" class="ffacebook">facebook</a>
+                        
+                    <a href="#" class="fflickr">flickr</a>
+                        
+                    <a href="#" class="ffeed">feed</a>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div><!--footer Share-->
+			</div>
+		</div>
+	</div><!--footer-->
+    
 
-$ayarsor=$db->prepare("select * from ayar where ayar_id=?");
-$ayarsor->execute(array(0));
-$ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
-
-
-?>
-<footer class="section footer-variant-2 footer-modern context-dark section-top-image section-top-image-dark">
-        <div class="footer-variant-2-content">
-          <div class="container">
-            <div class="row row-40 justify-content-between">
-              <div class="col-sm-6 col-lg-4 col-xl-3">
-                <div class="oh-desktop">
-                  <div class="wow slideInRight" data-wow-delay="0s">
-                    <div class="footer-brand"><a href="index.html"><img src="images/logo-inverse-196x42.png" alt="" width="196" height="42"/></a></div>
-                    <p>Herber is an organic farm located in California. We offer healthy foods and products to our clients.</p>
-                    <ul class="footer-contacts d-inline-block d-md-block">
-                      <li>
-                        <div class="unit unit-spacing-xs">
-                          <div class="unit-left"><span class="icon fa fa-phone"></span></div>
-                          <div class="unit-body"><a class="link-phone" href="tel:#"><?php echo $ayarcek['ayar_tel']; ?></a></div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="unit unit-spacing-xs">
-                          <div class="unit-left"><span class="icon fa fa-clock-o"></span></div>
-                          <div class="unit-body">
-                            <p><?php echo $ayarcek['ayar_mail']; ?></p>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="unit unit-spacing-xs">
-                          <div class="unit-left"><span class="icon fa fa-location-arrow"></span></div>
-                          <div class="unit-body"><a class="link-location" href="#"><?php echo $ayarcek['ayar_adres']; ?></a><br></div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="unit unit-spacing-xs">
-                          <div class="unit-left"><span class="icon fa fa-location-arrow"></span></div>
-                          <div class="unit-body"><a class="link-location" href="#"><?php echo $ayarcek['ayar_ilce']; ?></a></div>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="unit unit-spacing-xs">
-                          <div class="unit-left"><span class="icon fa fa-location-arrow"></span></div>
-                          <div class="unit-body"><a class="link-location" href="#"><?php echo $ayarcek['ayar_il']; ?></a></div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-4 col-xl-4">
-                <div class="oh-desktop">
-                  <div class="inset-top-18 wow slideInDown" data-wow-delay="0s">
-                    <h5>Newsletter</h5>
-                    <p>Join our email newsletter for news and tips.</p>
-                    <form class="rd-form rd-mailform" data-form-output="form-output-global" data-form-type="subscribe" method="post" action="bat/rd-mailform.php">
-                      <div class="form-wrap">
-                        <input class="form-input" id="subscribe-form-5-email" type="email" name="email" data-constraints="@Email @Required">
-                        <label class="form-label" for="subscribe-form-5-email">Enter Your E-mail</label>
-                      </div>
-                      <button class="button button-block button-white" type="submit">Kaydet</button>
-                    </form>
-                    <div class="group-lg group-middle">
-                      <p class="text-white">Beni Takip Et</p>
-                      <div>
-                        <ul class="list-inline list-inline-sm footer-social-list-2">
-                          <li><a class="icon fa fa-facebook" href="<?php echo $ayarcek['ayar_facebook']; ?>"></a></li>
-                          <li><a class="icon fa fa-twitter" href="<?php echo $ayarcek['ayar_twitter']; ?>"></a></li>
-                          <li><a class="icon fa fa-youtube" href="<?php echo $ayarcek['ayar_youtube']; ?>"></a></li>
-                          <li><a class="icon fa fa-instagram" href="<?php echo $ayarcek['ayar_facebook']; ?>"></a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-xl-3">
-                <div class="oh-desktop">
-                  <div class="inset-top-18 wow slideInLeft" data-wow-delay="0s">
-                    <h5>Gallery</h5>
-                    <div class="row row-10 gutters-10" data-lightgallery="group">
-                      <div class="col-6 col-sm-3 col-lg-6">
-                        <!-- Thumbnail Classic-->
-                        <article class="thumbnail thumbnail-mary">
-                          <div class="thumbnail-mary-figure"><img src="images/gallery-image-1-129x120.jpg" alt="" width="129" height="120"/>
-                          </div>
-                          <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="images/gallery-original-7-800x1200.jpg" data-lightgallery="item"><img src="images/gallery-image-1-129x120.jpg" alt="" width="129" height="120"/></a>
-                          </div>
-                        </article>
-                      </div>
-                      <div class="col-6 col-sm-3 col-lg-6">
-                        <!-- Thumbnail Classic-->
-                        <article class="thumbnail thumbnail-mary">
-                          <div class="thumbnail-mary-figure"><img src="images/gallery-image-2-129x120.jpg" alt="" width="129" height="120"/>
-                          </div>
-                          <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="images/gallery-original-8-1200x800.jpg" data-lightgallery="item"><img src="images/gallery-image-2-129x120.jpg" alt="" width="129" height="120"/></a>
-                          </div>
-                        </article>
-                      </div>
-                      <div class="col-6 col-sm-3 col-lg-6">
-                        <!-- Thumbnail Classic-->
-                        <article class="thumbnail thumbnail-mary">
-                          <div class="thumbnail-mary-figure"><img src="images/gallery-image-3-129x120.jpg" alt="" width="129" height="120"/>
-                          </div>
-                          <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="images/gallery-original-9-800x1200.jpg" data-lightgallery="item"><img src="images/gallery-image-3-129x120.jpg" alt="" width="129" height="120"/></a>
-                          </div>
-                        </article>
-                      </div>
-                      <div class="col-6 col-sm-3 col-lg-6">
-                        <!-- Thumbnail Classic-->
-                        <article class="thumbnail thumbnail-mary">
-                          <div class="thumbnail-mary-figure"><img src="images/gallery-image-4-129x120.jpg" alt="" width="129" height="120"/>
-                          </div>
-                          <div class="thumbnail-mary-caption"><a class="icon fl-bigmug-line-zoom60" href="images/gallery-original-10-1200x800.jpg" data-lightgallery="item"><img src="images/gallery-image-4-129x120.jpg" alt="" width="129" height="120"/></a>
-                          </div>
-                        </article>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="footer-variant-2-bottom-panel">
-          <div class="container">
-            <!-- Rights-->
-            <div class="group-sm group-sm-justify">
-              <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span> <span>Herber</span>. All rights reserved 2020
-              </p>
-              <p class="rights">Design&nbsp;by&nbsp;<a href="#"></a><?php echo $ayarcek['ayar_author']; ?></p>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-    <!-- Global Mailform Output-->
-    <div class="snackbars" id="form-output-global"></div>
-    <!-- Javascript-->
-    <script src="js/core.min.js"></script>
-    <script src="js/script.js"></script>
-    <!-- coded by Ragnar-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap\js\bootstrap.min.js"></script>
+	
+	<!-- map -->
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+	<script type="text/javascript" src="js\jquery.ui.map.js"></script>
+	<script type="text/javascript" src="js\demo.js"></script>
+	
+	<!-- owl carousel -->
+    <script src="js\owl.carousel.min.js"></script>
+	
+	<!-- rating -->
+	<script src="js\rate\jquery.raty.js"></script>
+	<script src="js\labs.js" type="text/javascript"></script>
+	
+	<!-- Add mousewheel plugin (this is optional) -->
+	<script type="text/javascript" src="js\product\lib\jquery.mousewheel-3.0.6.pack.js"></script>
+	
+	<!-- fancybox -->
+    <script type="text/javascript" src="js\product\jquery.fancybox.js?v=2.1.5"></script>
+	
+	<!-- custom js -->
+    <script src="js\shop.js"></script>
+	</div>
   </body>
 </html>
