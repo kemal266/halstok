@@ -31,37 +31,17 @@ if (isset($_POST['kullanicigiris'])) {
 	}
 }
 
-
-
-
-
-
-
-
-
 if (isset($_POST['kullanicikaydet'])) {
 
-	
 	echo $kullanici_adsoyad=htmlspecialchars($_POST['kullanici_adsoyad']); echo "<br>";
 	echo $kullanici_mail=htmlspecialchars($_POST['kullanici_mail']); echo "<br>";
     echo $kullanici_passwordtwo=htmlspecialchars($_POST['kullanici_tel']); echo "<br>";
 	echo $kullanici_passwordone=trim($_POST['kullanici_passwordone']); echo "<br>";
     echo $kullanici_passwordtwo=trim($_POST['kullanici_passwordtwo']); echo "<br>";
 
-    
-
-
 	if ($kullanici_passwordone==$kullanici_passwordtwo) {
 
-
 		if (strlen($kullanici_passwordone)>=6) {
-
-
-			
-
-			
-
-
 // Başlangıç
 
 			$kullanicisor=$db->prepare("select * from kullanici where kullanici_mail=:mail");
@@ -71,8 +51,6 @@ if (isset($_POST['kullanicikaydet'])) {
 
 			//dönen satır sayısını belirtir
 			$say=$kullanicisor->rowCount();
-
-
 
 			if ($say==0) {
 
@@ -98,16 +76,11 @@ if (isset($_POST['kullanicikaydet'])) {
 					));
 
 				if ($insert) {
-                    
-
-
-					header("Location:../../site/index.php?durum=loginbasarili");
-
+				header("Location:../../site/index.php?durum=loginbasarili");
 
 				//Header("Location:../production/genel-ayarlar.php?durum=ok");
 
 				} else {
-
 
 					header("Location:../../site/register.php?durum=basarisiz");
 				}
@@ -116,56 +89,19 @@ if (isset($_POST['kullanicikaydet'])) {
 
 				header("Location:../../site/register.php?durum=mukerrerkayit");
 
-
-
 			}
-
-
-
-
-		// Bitiş
-
-
 
 		} else {
 
-
 			header("Location:../../site/register.php?durum=eksiksifre");
-
-
 		}
 
-
-
 	} else {
-
-
 
 		header("Location:../../site/register.php?durum=farklisifre");
 	}
 	
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if(isset($_POST['loggin'])){
 
      $kullanici_mail=$_POST['kullanici_mail'];
@@ -173,10 +109,11 @@ if(isset($_POST['loggin'])){
 
     if ($kullanici_mail && $kullanici_password) {
 
-        $kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail 
+        $kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail and kullanici_yetki=:yetki
         and kullanici_password=:password");
         $kullanicisor->execute(array(
           'mail' => $kullanici_mail,
+          'yetki' =>5,
           'password' => $kullanici_password
         ));
       $say=$kullanicisor->rowCount();
@@ -347,7 +284,7 @@ if ($update){
 
 if(isset($_POST['firmakaydet'])) 
 {
-    
+    echo $firma_sifre=md5($_POST['firma_sifre']); 
     $uploads_dir ='../../dimg/firma';
     @$tmp_name =$_FILES['firma_resimyol']["tmp_name"];
     @$name =$_FILES['firma_resimyol']["name"];
@@ -363,6 +300,7 @@ $firma_sifre=md5($_POST['firma_sifre']);
 $kaydet=$db->prepare("INSERT INTO firma SET
 firma_ad=:ad,
 firma_sifre=:sifre,
+firma_mail=:mail,
 firma_adres=:adres,
 firma_tel=:tel,
 firma_sira=:sira,
@@ -374,6 +312,7 @@ $insert=$kaydet->execute(array(
 
      'ad'=>$_POST['firma_ad'],
      'sifre'=>$_POST['firma_sifre'],
+     'mail'=>$_POST['firma_mail'],
      'adres'=>$_POST['firma_adres'],
      'tel'=>$_POST['firma_tel'],
      'sira'=>$_POST['firma_sira'],
@@ -402,7 +341,7 @@ if ($_GET['firmasil']=="ok") {
 
    if(isset($_POST['firmaduzenle'])) 
 {
-
+    echo $firma_sifre=md5($_POST['firma_sifre']); 
         if ($_FILES['firma_resimyol']["size"] >0) {
            
             $uploads_dir ='../../dimg/firma';
@@ -419,6 +358,7 @@ if ($_GET['firmasil']=="ok") {
             $duzenle=$db->prepare("UPDATE firma SET
             firma_ad=:ad,
             firma_sifre=:sifre,
+            firma_mail=:mail,
             firma_adres=:adres,
             firma_tel=:tel,
             firma_sira=:sira,
@@ -430,6 +370,7 @@ if ($_GET['firmasil']=="ok") {
             
                  'ad'=>$_POST['firma_ad'],
                  'sifre'=>$_POST['firma_sifre'],
+                 'mail'=>$_POST['firma_mail'],
                  'adres'=>$_POST['firma_adres'],
                  'tel'=>$_POST['firma_tel'],
                  'sira'=>$_POST['firma_sira'],
@@ -451,6 +392,7 @@ if ($_GET['firmasil']=="ok") {
     $duzenle=$db->prepare("UPDATE firma SET
     firma_ad=:ad,
     firma_sifre=:sifre,
+    firma_mail=:mail,
     firma_adres=:adres,
     firma_tel=:tel,
     firma_sira=:sira,
@@ -461,6 +403,7 @@ if ($_GET['firmasil']=="ok") {
     
          'ad'=>$_POST['firma_ad'],
          'sifre'=>$_POST['firma_sifre'],
+         'mail'=>$_POST['firma_mail'],
          'adres'=>$_POST['firma_adres'],
          'tel'=>$_POST['firma_tel'],
          'sira'=>$_POST['firma_sira'],
@@ -685,6 +628,69 @@ if (isset($_POST['logoduzenle'])) {
 	}
 
 }
+
+if (isset($_POST['yorumkaydet'])) {
+
+
+	$gelen_url=$_POST['gelen_url'];
+
+	$ayarekle=$db->prepare("INSERT INTO yorumlar SET
+		yorum_detay=:yorum_detay,
+		kullanici_id=:kullanici_id,
+		urun_id=:urun_id	
+		
+		");
+
+	$insert=$ayarekle->execute(array(
+		'yorum_detay' => $_POST['yorum_detay'],
+		'kullanici_id' => $_POST['kullanici_id'],
+		'urun_id' => $_POST['urun_id']
+		
+		));
+
+
+	if ($insert) {
+
+		Header("Location:$gelen_url?durum=ok");
+
+	} else {
+
+		Header("Location:$gelen_url?durum=no");
+	}
+
+}
+
+if (isset($_POST['sepetekle'])) {
+
+
+	$ayarekle=$db->prepare("INSERT INTO sepet SET
+		urun_adet=:urun_adet,
+		kullanici_id=:kullanici_id,
+     
+		urun_id=:urun_id	
+		
+		");
+
+	$insert=$ayarekle->execute(array(
+		'urun_adet' => $_POST['urun_adet'],
+        'kullanici_id' => $_POST['kullanici_id'],
+       
+		'urun_id' => $_POST['urun_id']
+		
+		));
+
+
+	if ($insert) {
+
+		Header("Location:../../site/sepet.php?durum=ok");
+
+	} else {
+
+		Header("Location:../../site/sepet.php?durum=no");
+	}
+
+}
+
 
 
 ?>

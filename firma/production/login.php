@@ -33,7 +33,7 @@
             <form action="../netting/islem.php"method="POST">
               <h1>Firma Giriş Paneli</h1>
               <div>
-                <input type="text" name="firma_ad" class="form-control" placeholder="Kullanıcı Adı" required="" />
+                <input type="text" name="firma_mail" class="form-control" placeholder="Kullanıcı Adı" required="" />
               </div>
               <div>
                 <input type="password"name="firma_sifre" class="form-control" placeholder="Şifre" required="" />

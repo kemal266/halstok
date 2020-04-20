@@ -3,7 +3,7 @@ include 'header.php';
 include '../netting/baglan.php';
 
 
-$firmasor=$db->prepare("SELECT * from firma  where firma_id=:firma_id");
+$firmasor=$db->prepare("SELECT * from firma where firma_id=:firma_id");
 $kontrol=$firmasor->execute(array(
     'firma_id' => $_GET['firma_id']
 ));
@@ -95,6 +95,13 @@ if (@$_GET['durum']=='ok') {?>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="first-name" required="required" name="firma_sifre" value="<?php echo $firmacek['firma_sifre']?>"class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Firma Maail <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="email" id="first-name" required="required" name="firma_mail" value="<?php echo $firmacek['firma_mail']?>"class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
 

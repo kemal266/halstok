@@ -2,9 +2,9 @@
 ob_start();
 session_start();
 include '../netting/baglan.php';
-$kullanicisor=$db->prepare("select * from firma where firma_ad=:ad");
+$kullanicisor=$db->prepare("select * from firma where firma_mail=:mail");
 $kullanicisor->execute(array(
-  'ad' => $_SESSION['firma_ad']
+  'mail' => $_SESSION['firma_mail']
   ));
   $say=$kullanicisor->rowCount();
 
@@ -60,7 +60,7 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
               </div>
               <div class="profile_info">
                 <span>Hoşgeldin</span>
-                <h2><?php echo $_SESSION['firma_ad']; ?></h2>
+                <h2><?php echo $_SESSION['firma_mail']; ?></h2>
               </div>
               <div class="clearfix"></div>
             </div>
@@ -101,7 +101,7 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""><?php echo $_SESSION['firma_ad']; ?>
+                    <img src="images/img.jpg" alt=""><?php echo $_SESSION['firma_mail']; ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

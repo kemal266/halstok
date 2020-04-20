@@ -16,7 +16,7 @@ $hakkimizdacek=$hakkimizdasor->fetch(PDO::FETCH_ASSOC);
 					<div class="page-title-inner">
 					<div class="row">
 						<div class="col-md-4">
-							<div class="bigtitle">Hakkımızda Sayfası</div>
+							<div class="bigtitle "style="margin-left:380px;">Hakkımızda</div>
 						</div>
 					
 					</div>
@@ -44,8 +44,7 @@ $hakkimizdacek=$hakkimizdasor->fetch(PDO::FETCH_ASSOC);
 				</div>
 				<blockquote><?php echo $hakkimizdacek['hakkimizda_misyon']; ?></blockquote>
 			</div>
-			<!--Sidebar kısmı-->
-
+			<?php  include 'sidebar.php'?>
 	
 		</div>
 		<div class="spacer"></div>

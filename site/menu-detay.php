@@ -39,10 +39,10 @@ $menucek=$menusor->fetch(PDO::FETCH_ASSOC);
 				
 				</div>
 
-			<!--Sidebar kısmı-->
-
+				
 	
 		</div>
+		<?php  include 'sidebar.php'?>
 		<div class="spacer"></div>
 	</div>
 	

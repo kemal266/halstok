@@ -85,10 +85,12 @@ if (@$_GET['durum']=='ok') {?>
                             <th class="column-title">Firma Resim </th>
                             <th class="column-title""text-center">Firma Ad </th>
                             <th class="column-title""text-center">Firma Şifre </th>
+                            <th class="column-title""text-center">Firma mail </th>
                             <th class="column-title""text-center">Firma Adres </th>
                             <th class="column-title""text-center">Firma Tel </th>
                             <th class="column-title""text-center">Firma sıra </th>
                             <th class="column-title""text-center">Firma Durum </th>
+                 
                             <th width="80" class="column-title"> </th>
                             <th width="80" class="column-title"> </th>
                            
@@ -110,6 +112,7 @@ if (@$_GET['durum']=='ok') {?>
                             <td class=" "><img width="150"height="100" src="../<?php echo $firmacek['firma_resimyol']?>"></td>
                             <td class="text-center"><b><?php echo $firmacek['firma_ad']?></b></td>
                             <td class="text-center"><b><?php echo $firmacek['firma_sifre']?></b></td>
+                            <td class="text-center"><b><?php echo $firmacek['firma_mail']?></b></td>
                             <td class="text-center"><b><?php echo $firmacek['firma_adres']?></b></td>
                             <td class="text-center"><b><?php echo $firmacek['firma_tel']?></b></td>
                             <td class="text-center"><b><?php echo $firmacek['firma_sira']?></b></td>

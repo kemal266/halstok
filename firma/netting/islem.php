@@ -5,15 +5,15 @@ include 'baglan.php';
 
 if(isset($_POST['loggin'])){
 
-     $firma_ad=$_POST['firma_ad'];
+     $firma_mail=$_POST['firma_mail'];
      $firma_sifre=md5($_POST['firma_sifre']);
 
-    if ($firma_ad && $firma_sifre) {
+    if ($firma_mail && $firma_sifre) {
 
-        $kullanicisor=$db->prepare("SELECT * FROM firma where firma_ad=:ad 
+        $kullanicisor=$db->prepare("SELECT * FROM firma where firma_mail=:mail 
         and firma_sifre=:password");
         $kullanicisor->execute(array(
-          'ad' => $firma_ad,
+          'mail' => $firma_mail,
           'password' => $firma_sifre
         ));
       $say=$kullanicisor->rowCount();
@@ -22,7 +22,7 @@ if(isset($_POST['loggin'])){
 
       if ($say>0) {
         
-        $_SESSION['firma_ad']=$firma_ad;
+        $_SESSION['firma_mail']=$firma_mail;
         
 
         header('location:../production/index.php');
@@ -112,6 +112,7 @@ if ($_GET['urunsil']=="ok") {
             urun_stok=:stok,
             urun_sira=:sira,
             urun_durum=:durum,
+            urun_onecikar=:urun_onecikar,
             urun_resim=:resim
             WHERE urun_id={$_POST['urun_id']}");
             $update=$duzenle->execute(array(
@@ -122,6 +123,7 @@ if ($_GET['urunsil']=="ok") {
                  'stok'=>$_POST['urun_stok'],
                  'sira'=>$_POST['urun_sira'],
                  'durum'=>$_POST['urun_durum'],
+                 'urun_onecikar'=>$_POST['urun_onecikar'],
                  'resim'=>$refimgyol
              ));
             
