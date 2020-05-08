@@ -5,3 +5,8 @@ Arayüzde ürün listelemesi yapıldı
 Admin ve Kullanıcı profil düzenleme yapıldı
 Kullanıcı login işlemi yapıldı
 Admin Panelinde kullanıcı listeleme ve düzenleme işlemleri yapıldı
+-Ürünlere kullanıcılar tarafından yorum yapma işlemiyapıldı
+-Admin panelinde yorum listeleme işlemi yapıldı ve yorum silme butonu eklendi
+-Ürün sepete ekleme işlemi yapıldı
+-ödeme sayfası yapıldı
+-Firmalarda siparişler listelendi 

@@ -29,7 +29,7 @@
 						</div>
 					</div>
 					<div class="slide-type-1">
-						<img src="images\slide-1.jpg" alt="" class="img-responsive">
+						<img src="images\firma1.jpg" alt="" class="img-responsive">
 					</div>
 				</div>
 				<div class="item">
@@ -52,7 +52,7 @@
 						</div>
 					</div>
 					<div class="slide-type-1">
-						<img src="images\slide-2.jpg" alt="" class="img-responsive">
+						<img src="images\firma2.jpeg" alt="" class="img-responsive">
 					</div>
 				</div>
 				<div class="item">
@@ -75,7 +75,7 @@
 						</div>
 					</div>
 					<div class="slide-type-1">
-						<img src="images\slide-3.jpg" alt="" class="img-responsive">
+						<img src="images\firma3.jpeg" alt="" class="img-responsive">
 					</div>
 				</div>
 				<div class="item">
@@ -121,7 +121,7 @@
 						</div>
 					</div>
 					<div class="slide-type-1">
-						<img src="images\slide-2.jpg" alt="" class="img-responsive">
+						<img src="images\firma1.jpg" alt="" class="img-responsive">
 					</div>
 				</div>
 				<div class="item">
@@ -193,7 +193,7 @@
 	<div class="f-widget featpro">
 		<div class="container">
 			<div class="title-widget-bg">
-				<div class="title-widget">Öne Çıkan Ürünler</div>
+				<div class="title-widget">Çok Satan Ürünler</div>
 				<div class="carousel-nav">
 					<a class="prev"></a>
 					<a class="next"></a>

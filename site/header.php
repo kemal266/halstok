@@ -231,7 +231,7 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 
         <tr>
          <td>
-          <a href="product.htm"><img src="<?php echo $uruncek['urun_resim'] ?>" alt="" class="img-responsive"></a>
+          <a href="urunler.php"><img src="<?php echo $uruncek['urun_resim'] ?>" alt="" class="img-responsive"></a>
         </td>
         <td><a href="product.htm"><?php echo $uruncek['urun_ad'] ?></a></td>
         <td><?php echo $sepetcek['urun_adet'] ?> Adet</td>
@@ -246,13 +246,13 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 
 <br>
 <div class="btn-popcart">
- <a href="checkout.htm" class="btn btn-default btn-red btn-sm">Ödeme Sayfası</a>
+ <a href="odeme.php" class="btn btn-default btn-red btn-sm">Ödeme Sayfası</a>
 
 </div>
 <div class="popcart-tot">
  <p>
   Toplam:<br>
-  <span><?php echo $toplam_fiyat ?> TL</span>
+  <span><?php echo @$toplam_fiyat ?> TL</span>
 </p>
 </div>
 <div class="clearfix"></div>

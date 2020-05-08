@@ -64,16 +64,30 @@ if ($say==0) {
 						<form action="../neadmin/netting/islem.php" method="POST">
 
 						<div class="form-group">
-							<label for="qty" class="col-sm-2 control-label">Adet</label>
+							<label for="qty" class="col-sm-2 control-label">Miktar</label>
 							<div class="col-sm-4">
 								<input type="text" class="form-control" value="1" name="urun_adet">
 							</div>
 							<input type="hidden" name="kullanici_id" value="<?php echo $kullanicicek['kullanici_id'] ?>">
 
-										<input type="hidden" name="urun_id" value="<?php echo $uruncek['urun_id'] ?>">
-							<div class="col-sm-4">
-								<button type="submit" name="sepetekle" class="btn btn-default btn-red btn-sm"><span class="addchart">Sepete Ekle</span></button>
-							</div>
+							<input type="hidden" name="urun_id" value="<?php echo $uruncek['urun_id'] ?>">
+									<div class="col-sm-4">
+
+										<?php if (isset($_SESSION['userkullanici_mail'])) {?>
+
+										<button type="submit" name="sepetekle" class="btn btn-default btn-red btn-sm"><span class="addchart">Sepete Ekle</span></button>
+
+
+										<?php  } else { ?>
+
+										<button type="submit" name="sepetekle" disabled class="btn btn-default btn-red btn-sm"><span class="addchart">Giriş Yapın</span></button>
+
+										<?php } ?>
+
+
+
+
+									</div>
 							<div class="clearfix"></div>
 						</div>
 

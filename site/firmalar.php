@@ -70,7 +70,7 @@
 							<div class="pr-img">
 								<div class="hot"></div>
 								<a href="firma-<?=seo($firmacek["firma_ad"]).'-'.$firmacek["firma_id"]?>"><img src="<?php echo $firmacek['firma_resimyol']?>" alt="" class="img-responsive"></a>
-								<div class="pricetag on-sale"><div class="inner on-sale"><span class="onsale"><span class="oldprice">$314</span>$199</span></div></div>
+								
 							</div>
 							<span class="smalltitle"><a href="product.htm"><?php echo $firmacek['firma_ad']?></a></span>
 							<span class="smalldesc"><?php echo $firmacek['firma_tel']?></span>

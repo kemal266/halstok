@@ -22,7 +22,10 @@
                       <li><a href="api-ayar.php">Api Ayarları</a></li>
                       <li><a href="sosyalmedya-ayar.php">Sosyam Medya Ayarları</a></li>
                       <li><a href="mail-ayar.php">Mail Ayarları</a></li>
+                 
                     </ul>
+                    <li><a href="yorum.php"><i class="fa fa-comments"></i> Yorumlar </a></li>
+                    <li><a href="banka.php"><i class="fa fa-bank"></i> Bankalar </a></li>
                   </li>   
                 </ul>
               </div>
