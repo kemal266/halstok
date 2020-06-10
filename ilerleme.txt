@@ -10,3 +10,8 @@ Admin Panelinde kullanıcı listeleme ve düzenleme işlemleri yapıldı
 -Ürün sepete ekleme işlemi yapıldı
 -ödeme sayfası yapıldı
 -Firmalarda siparişler listelendi 
+-Sepete ekleme işlemi yapıldı
+-Sipariş verme işlemi yapıldı
+-Ürüne yorum yapma işlemi yapıldı
+-Kullanıcı şifre ve profil güncelleme işlemi yapıldı
+-Firma sipariş görüntüleme işlemi yapıldı
