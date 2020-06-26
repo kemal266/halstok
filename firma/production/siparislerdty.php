@@ -3,8 +3,7 @@
 include 'header.php'; 
 
 //Belirli veriyi seçme işlemi
-$siparissor=$db->prepare("SELECT * FROM siparis ");
-$siparissor->execute();
+
 
 
 ?>
@@ -13,7 +12,7 @@ $siparissor->execute();
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Siparişler
+                <h3>Siparişler Detay
 
                 </h3>
               </div>
@@ -67,14 +66,16 @@ $siparissor->execute();
             <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
-                  <th>Sipariş No</th>
-                  <th>Sipariş Zaman</th>
-                  <th>Sipariş Toplam</th>
-                  <th>Sipariş Tip</th>
-                  <th>Banka</th>
-                  <th>Kullanıcı Adı</th>
-                  <th>Kullanıcı Tel</th>
-                  <th>Kullanıcı Adı</th>
+                <th>Ürün Sıra</th>
+		
+
+        <th>Ürün ad</th>
+
+        <th>Ürün Kodu</th>
+
+        <th>Adet</th>
+        <th>Firma</th>
+        <th>Ürün Fiyat</th>
                   
                  
                 </tr>
@@ -82,36 +83,97 @@ $siparissor->execute();
 
               <tbody>
 
-                <?php 
-                
+              <?php
 
-                while($sipariscek=$siparissor->fetch(PDO::FETCH_ASSOC)) {
-          
-                  ?>
+$siparis_id=$_GET['siparis_id'];
 
 
-                <tr>
-                  <td><?php echo $sipariscek['siparis_id'] ?></td>
-                  <td><?php echo $sipariscek['siparis_zaman'] ?></td>
-                  <td><?php echo $sipariscek['siparis_toplam'] ?></td>
-                  <td><?php echo $sipariscek['siparis_tip'] ?></td>
-                  <td><?php echo $sipariscek['siparis_banka'] ?></td>
-                  <td><?php
-                  $adcek = $db->query("select kullanici_adsoyad from kullanici where kullanici_id=" . $sipariscek['kullanici_id'])->fetch();
-					      	echo $adcek['kullanici_adsoyad']; ?></td>
-                   <td><?php
-                  $adcek = $db->query("select kullanici_tel from kullanici where kullanici_id=" . $sipariscek['kullanici_id'])->fetch();
-					      	echo $adcek['kullanici_tel']; ?></td>
-                  
+
+$siparisdetaysor=$db->prepare("SELECT * FROM siparis where siparis_id=:siparis_id");
+
+$siparisdetaysor->execute(array(
+
+'siparis_id' => $siparis_id,
+
+
+
+));
+
+
+
+$siparisdetaycek=$siparisdetaysor->fetch(PDO::FETCH_ASSOC);
+
+
+
+// echo $siparisdetaycek['siparis_id'];
+
+
+
+$siparis_id=$siparisdetaycek['siparis_id'];
+
+
+
+$urundetaysor=$db->prepare("SELECT * FROM siparis_detay where siparis_id=:siparis_id");
+
+$urundetaysor->execute(array(
+
+'siparis_id' => $siparis_id
+
+));
+
+
+
+while($sepetdetaycek=$urundetaysor->fetch(PDO::FETCH_ASSOC)) {
+
+$say++;
+
+$urun_id=$sepetdetaycek['urun_id'];
+
+$urunsor=$db->prepare("SELECT * FROM urun where urun_id=:urun_id");
+
+$urunsor->execute(array(
+
+'urun_id' => $urun_id
+
+));
+
+
+
+$uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
+
+@$toplam_fiyat+=$uruncek['urun_fiyat']*$sepetdetaycek['urun_adet'];
+
+
+
+?>
+
+
+
+
+
+
+
+
+
+<tr>
+
+<td><?php echo $say-1 ?></td>
+
+<td style="text-align: left"><?php echo $uruncek['urun_ad'] ?></td>
+
+<td><?php echo $uruncek['urun_id'] ?></td>
+
+<td><form><?php echo $sepetdetaycek['urun_adet'] ?></form></td>
+<td><?php  $adcek = $db->query("select firma_ad from firma where firma_id=" . $sepetdetaycek['firma_id'])->fetch();
+						echo $adcek['firma_ad']; ?></td>
+<td><?php echo $uruncek['urun_fiyat'] ?></td>
+
+
+</tr>
+
+<?php }  ?>
+
            
-           <td><a href="siparislerdty.php?siparis_id=<?php echo $sipariscek['siparis_id']; ?>"><button type="submit" class="btn btn-primary btn-xs">Detaylar</button></a></td>
-                </tr>
-
-
-
-                <?php  }
-
-                ?>
 
 
               </tbody>
